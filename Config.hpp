@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+ /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   Config.hpp                                         :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: moelalj <moelalj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 19:41:47 by moelalj           #+#    #+#             */
-/*   Updated: 2024/06/11 11:44:41 by moelalj          ###   ########.fr       */
+/*   Updated: 2024/06/25 21:36:17 by moelalj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,30 @@ class location {
 	private:
 		std::string uri;
 		std::map<std::string, std::string> key_value;
+	public:
+		void set_uri(std::string URI);
+		void	set_Map(std::string key, std::string value);
+		std::map<std::string, std::string> get_Map() const;
 };
 
 class server_config {
 	private:
 		std::map<std::string, std::string> 	key_value;
 		std::vector<location> 							locations;
+	public:
+		void	set_Map(std::string key, std::string value);
+		std::map<std::string, std::string> get_Map() const;
+		void print_map();
 };
 
 class config {
 	private:
 		std::map<std::string, std::string> key_value;
-		std::vector<server_config> 			server_config;
+		std::vector<server_config> 			server_configs;
 	public:
-		//void	add(server_config server) {
-		//	server_config.push_back(server);
-		//}
+		void	add(server_config server) {
+			server_configs.push_back(server);
+		}
 		void set_Map(std::string key, std::string value);
 		std::map<std::string, std::string> get_Map() const;
 		void print_map();
