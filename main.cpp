@@ -8,6 +8,7 @@ int check_which_context(std::string key)
 		return (2);
 	return (0);
 }
+
 config parse_file(std::string file_path)
 {
 	config Config;
@@ -23,10 +24,7 @@ config parse_file(std::string file_path)
 			if (!str.empty())
 			{
 				if (check_only_key_value(trim(line)))
-				{
-					std::cout << "-" <<line << std::endl;
 					Config.set_Map(str[0], str[1]);
-				}
 				else
 				{
 					if(check_which_context(str[0]))
@@ -35,14 +33,16 @@ config parse_file(std::string file_path)
 
 						while(std::getline(file, line))
 						{
+							if (searchCharacter(line, '}'))
+							{
+								Config.add(Server);
+								break;
+							}
 								std::vector<std::string>str1 = splitString(trim(line), ' ');
 								if (!str1.empty())
 								{
 									if (check_only_key_value(trim(line)))
-									{
-										std::cout << "server- " << line << std::endl;
 										Server.set_Map(str1[0], str1[1]);
-									}
 									else
 									{
 										if (check_which_context(str1[0]) == 2)
@@ -52,14 +52,16 @@ config parse_file(std::string file_path)
 											Location.set_uri(str1[1]);
 											while (std::getline(file, line))
 											{
+												if (searchCharacter(line, ']'))
+												{
+													Server.add(Location);
+													break;
+												}
 												std::vector<std::string>str2 = splitString(trim(line), ' ');
 												if (!str2.empty())
 												{
 													if (check_only_key_value(trim(line)))
-													{
-														std::cout << "locaiton- " << line << std::endl;
 														Location.set_Map(str2[0], str2[1]);
-													}
 												}
 											}
 										}
@@ -80,14 +82,18 @@ config parse_file(std::string file_path)
 	return Config;
 }
 
-int main()
+int main(int argc, char *argv[])
 {
-	std::string file_path = "nginx.conf";
-	config config_file;
-	server_config Server_config;
+	if (argc == 2)
+	{
+		std::string file_path = argv[1];
+
+		config config_file;
 	
-	config_file = parse_file(file_path);
-	config_file.print_map();
-	Server_config.print_map();
+		config_file = parse_file(file_path);
+		config_file.print_map();
+	}
+	else
+		std::cerr << "Error:\n Please Enter A Good Params!!" << std::endl;
 	return (0);
 }

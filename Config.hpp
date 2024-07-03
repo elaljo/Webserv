@@ -23,6 +23,7 @@ class location {
 		std::map<std::string, std::string> key_value;
 	public:
 		void set_uri(std::string URI);
+		std::string get_uri();
 		void	set_Map(std::string key, std::string value);
 		std::map<std::string, std::string> get_Map() const;
 };
@@ -32,18 +33,27 @@ class server_config {
 		std::map<std::string, std::string> 	key_value;
 		std::vector<location> 							locations;
 	public:
+		void	add(location location) {
+			locations.push_back(location);
+		}
+		std::vector<location> getLocations() {
+			return locations;
+		}
 		void	set_Map(std::string key, std::string value);
 		std::map<std::string, std::string> get_Map() const;
-		void print_map();
 };
 
 class config {
 	private:
 		std::map<std::string, std::string> key_value;
 		std::vector<server_config> 			server_configs;
+	
 	public:
 		void	add(server_config server) {
 			server_configs.push_back(server);
+		}
+		std::vector<server_config> getServers() {
+			return server_configs;
 		}
 		void set_Map(std::string key, std::string value);
 		std::map<std::string, std::string> get_Map() const;
