@@ -6,7 +6,7 @@
 /*   By: moelalj <moelalj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 19:42:02 by moelalj           #+#    #+#             */
-/*   Updated: 2024/07/03 22:11:32 by moelalj          ###   ########.fr       */
+/*   Updated: 2024/07/04 01:41:29 by moelalj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,39 @@
 
 void config::print_map()
 {
-	std::cout << "	*map for the config*" << std::endl;
+	std::cout << "	- Config map -" << std::endl;
+	std::cout << "----------------------------"<< std::endl;
 	std::map<std::string, std::string>::iterator it;
 	std::map<std::string, std::string> mp = get_Map();
 	for(it = mp.begin(); it != mp.end(); it++){
 		std::cout << "Key: " << it->first << " | value: " << it->second << std::endl;
 	}
+	std::cout << "----------------------------"<< std::endl;
+
 
 	std::vector<server_config> servers = getServers();
 	
 	for (size_t i = 0; i < servers.size(); i++){
-		std::cout << "	*map for the server[" << i <<"]*" << std::endl;
+		std::cout << "	- Map dyal Server[" << i <<"]-" << std::endl;
+		std::cout << "----------------------------"<< std::endl;
+
 		std::map<std::string, std::string>::iterator its;
 		std::map<std::string, std::string> mps = servers[i].get_Map();
 		for(its = mps.begin(); its != mps.end(); its++){
 			std::cout << "Key: " << its->first << " | value: " << its->second << std::endl;
 		}
+		std::cout << "----------------------------"<< std::endl;
 		std::vector<location> locations = servers[i].getLocations();
 		for(size_t j = 0; j < locations.size(); j++){
-			std::cout << "	*map for the location[" << j <<"]*" << std::endl;
+			std::cout << "	- Map dyal location[" << j <<"]-" << std::endl;
+			std::cout << "----------------------------"<< std::endl;
 			std::cout << "URI -> " << locations[j].get_uri() << std::endl;
 			std::map<std::string, std::string>::iterator itl;
 			std::map<std::string, std::string> mpl = locations[j].get_Map();
 			for(itl = mpl.begin(); itl != mpl.end(); itl++){
 			std::cout << "Key: " << itl->first << " | value: " << itl->second << std::endl;
 		}
+		std::cout << "----------------------------"<< std::endl;
 		}
 	}
 }
