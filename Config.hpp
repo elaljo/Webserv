@@ -32,6 +32,7 @@ class server_config {
 	private:
 		std::map<std::string, std::string> 	key_value;
 		std::vector<location> 							locations;
+		std::vector<std::string>						ports;
 	public:
 		void	add(location location) {
 			locations.push_back(location);
@@ -41,6 +42,8 @@ class server_config {
 		}
 		void	set_Map(std::string key, std::string value);
 		std::map<std::string, std::string> get_Map() const;
+		void	store_ports(std::string p_line);
+		std::vector<std::string> get_ports();
 };
 
 class config {

@@ -42,7 +42,11 @@ config parse_file(std::string file_path)
 								if (!str1.empty())
 								{
 									if (check_only_key_value(trim(line)))
+									{
+										if(compare(str1[0], "listen"))
+											Server.store_ports(str1[1]);
 										Server.set_Map(str1[0], str1[1]);
+									}
 									else
 									{
 										if (check_which_context(str1[0]) == 2)
