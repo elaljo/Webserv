@@ -17,15 +17,17 @@
 #include <sstream>
 #include <fstream>
 
+extern size_t x;
+
 class location {
 	private:
 		std::string uri;
-		std::map<std::string, std::string> key_value;
+		std::map<std::string, std::vector<std::string> > key_value;
 	public:
 		void set_uri(std::string URI);
 		std::string get_uri();
-		void	set_Map(std::string key, std::string value);
-		std::map<std::string, std::string> get_Map() const;
+		void set_Map(std::string key, std::vector<std::string> value);
+		std::map<std::string, std::vector<std::string> > get_Map()const;
 };
 
 class server_config {
@@ -68,3 +70,7 @@ std::string trim(const std::string& str);
 int compare(std::string key, std::string skey);
 bool searchCharacter(const std::string& line, char target);
 int check_only_key_value(std::string line);
+std::string remv_last_char(std::string token);
+
+void errors_needs_server(std::string key);
+void	check_line(std::vector<std::string> str);

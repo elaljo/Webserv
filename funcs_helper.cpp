@@ -59,3 +59,15 @@ int check_only_key_value(std::string line)
         return (1);
     return (0);
 }
+std::string remv_last_char(std::string token)
+{
+    size_t i = 0;
+    std::string n_token;
+
+    while (i < token.size() - 1)
+    {
+        n_token.push_back(token[i]);
+        i++;
+    }
+    return (n_token);
+}

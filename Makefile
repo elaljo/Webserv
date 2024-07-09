@@ -9,6 +9,7 @@ RM = rm -rf
 SRC = Config.cpp\
 			main.cpp\
 			funcs_helper.cpp\
+			errors.cpp\
 
 
 OBJS := $(SRC:.cpp=.o)
